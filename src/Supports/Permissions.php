@@ -27,6 +27,16 @@ class Permission
     }
 
     /**
+     * Give multiple permissions to specific role
+     * 
+     * @return void
+     */
+    public function givePermissions(array $permissions)
+    {
+        return $this->permissions()->attach($permissions);
+    }
+
+    /**
      * Determine specific role has given permission
      * 
      * @return boolean
