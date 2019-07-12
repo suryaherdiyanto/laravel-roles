@@ -13,6 +13,16 @@ class Permission
     }
 
     /**
+     * Get all permissions for specific role
+     * 
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllPermissions()
+    {
+        return $this->permissions()->all();
+    }
+
+    /**
      * Give permission for specific role
      * 
      * @return void
