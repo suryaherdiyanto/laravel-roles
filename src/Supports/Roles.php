@@ -14,7 +14,7 @@ trait Roles
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'roles_users');
+        return $this->belongsToMany(Role::class);
     }
 
     /**
@@ -66,7 +66,7 @@ trait Roles
             $role = Role::firstOrCreate(['role' => $role])->id;
         }
 
-        return $this->roles()->attach($role);
+        return $this->roles()->attach($role) ?: false;
     }
 
     /**
