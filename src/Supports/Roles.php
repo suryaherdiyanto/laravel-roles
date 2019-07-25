@@ -120,7 +120,13 @@ trait Roles
      */
     public function hasPermission($permission)
     {
-        return $this->role()->hasPermission($permission) ?: false;
+        $role = $this->role();
+        
+        if ($this->role()) {
+            return $role->hasPermission($permission) ?: false;
+        }
+
+        return false;
     }
 
     /**
