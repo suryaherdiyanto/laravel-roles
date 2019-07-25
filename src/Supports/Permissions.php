@@ -1,6 +1,9 @@
 <?php
 
-class Permission 
+namespace Surya\Role\Supports;
+use Surya\Role\Models\Permission;
+
+trait Permissions
 {
     /**
      * Make Relation to Role
@@ -53,6 +56,6 @@ class Permission
      */
     public function hasPermission(string $permission)
     {
-        return $this->permissions()->where('name', $permission)->first() ? true : false;
+        return $this->permissions()->where('permission', $permission)->first() ? true : false;
     }
 }

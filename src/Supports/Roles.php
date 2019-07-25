@@ -54,7 +54,7 @@ trait Roles
      * Assign current user role
      *
      * @param $role
-     * @return mixed
+     * @return null
      */
     public function assignRole($role)
     {
@@ -66,14 +66,14 @@ trait Roles
             $role = Role::firstOrCreate(['role' => $role])->id;
         }
 
-        return $this->roles()->attach($role) ?: false;
+        return $this->roles()->attach($role);
     }
 
     /**
      * Detach current user roles
      *
      * @param $roles
-     * @return mixed
+     * @return bool
      */
     public function removeRole($roles)
     {
@@ -83,7 +83,7 @@ trait Roles
 
         $role = $this->roles()->where('role', $roles)->first();
 
-        return $this->detachRoles($role->id);
+        return ($this->detachRoles($role->id)) ? true : false;
     }
 
     /**
@@ -110,6 +110,17 @@ trait Roles
         }
 
         return $this->roles()->where('role', $role)->first() ? true : false;
+    }
+
+    /**
+     * Determine current user has specific permission
+     * 
+     * @param $permission
+     * @return bool
+     */
+    public function hasPermission($permission)
+    {
+        return $this->role()->hasPermission($permission) ?: false;
     }
 
     /**

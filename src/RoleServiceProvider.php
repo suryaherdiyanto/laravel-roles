@@ -2,7 +2,8 @@
 
 namespace Surya\Role;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class RoleServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,10 @@ class RoleServiceProvider extends ServiceProvider
         $this->publishes([
             dirname(__DIR__) . '/database/migrations' => database_path('migrations')
         ], 'migrations');
+
+        Gate::before(function($user, $ability) {
+            return $user->hasPermission($ability);
+        });
     }
 
     /**
