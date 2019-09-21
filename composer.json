@@ -17,7 +17,6 @@
     "autoload": {
         "psr-4": {
             "Surya\\Role\\": "src/"
-        },
-        "files": ["src/helpers.php"]
+        }
     }
 }
