@@ -35,8 +35,8 @@ trait Permissions
         if (!is_int($permission)) {
             $permission = $this->permissions()->firstOrCreate(['permission' => $permission])->id;
         }
-
-        return $this->permissions()->attach($permission);
+        $this->permissions()->attach($permission);
+        return true ?: false;
     }
 
     /**
@@ -46,7 +46,7 @@ trait Permissions
      */
     public function givePermissions(array $permissions)
     {
-        return $this->permissions()->attach($permissions);
+        return $this->permissions()->sync($permissions);
     }
 
     /**

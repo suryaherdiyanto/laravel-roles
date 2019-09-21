@@ -66,7 +66,9 @@ trait Roles
             $role = Role::firstOrCreate(['role' => $role])->id;
         }
 
-        return $this->roles()->attach($role);
+        $this->roles()->attach($role);
+
+        return true ?: false;
     }
 
     /**
@@ -94,7 +96,7 @@ trait Roles
      */
     public function assignRoles(array $roles)
     {
-        return $this->roles()->attach($roles);
+        return $this->roles()->sync($roles);
     }
 
     /**
